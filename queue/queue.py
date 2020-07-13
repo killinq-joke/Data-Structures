@@ -19,7 +19,7 @@ class Queue:
         self.storage = []
     
     def __len__(self):
-        pass
+        return len(self.storage)
 
     def enqueue(self, value):
         pass
