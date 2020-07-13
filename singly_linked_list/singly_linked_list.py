@@ -18,16 +18,17 @@ class Node:
 
 class LinkedList:
     def __init__(self):
-        self.head = None
+        self.head = Node()
         self.tail = None
 
     def add_to_tail(self, value):
 
-        if not self.tail:
-            self.tail = Node(value)
-        else:
-            self.tail.set_next(Node(value))
-            self.tail = Node(value)
+        new_node = Node(value)
+        cur = self.head
+        while cur.next != None:
+            cur = cur.next
+        cur.next = new_node
+        
 
     def remove_head(self):
         value = self.head.get_value()
@@ -39,10 +40,11 @@ class LinkedList:
             return value
         self.head = self.head.next
         return value
-        
 
     def contains(self, value):
         current = self.head
+        if not current:
+            return None
         while current.next != None:
             if current.value == value:
                 return True
@@ -52,7 +54,7 @@ class LinkedList:
     def get_max(self):
         current = self.head
         arr = []
-        while current.value != None:
+        while current.get_next() != None:
             arr.append(current.value)
         return max(arr)
 
@@ -73,3 +75,21 @@ class LinkedList:
         self.tail = current
         self.tail.set_next(None)
         return value
+
+    def display(self):
+        arr = []
+        cur_node = self.head
+        if cur_node:
+            while cur_node.next != None:
+                cur_node = cur_node.next
+                arr.append(cur_node.value)
+        print(arr)
+
+
+l = LinkedList()
+
+l.add_to_tail(20)
+l.add_to_tail(20)
+l.add_to_tail(20)
+
+l.display()
