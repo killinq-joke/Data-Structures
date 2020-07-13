@@ -22,7 +22,10 @@ class Queue:
         return len(self.storage)
 
     def enqueue(self, value):
-        pass
+        self.storage.append(value)
 
     def dequeue(self):
-        pass
+        if len(self.storage) > 0:
+            return self.storage.pop(0)
+        else:
+            return None
