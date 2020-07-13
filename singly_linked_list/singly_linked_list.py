@@ -38,18 +38,17 @@ class LinkedList:
         return "max"
 
     def get(self, index):
-        if index >= self.__len__():
+        if index >= self.__len__() or index < 0:
             print("get error")
             return None
         else:
             cur_idx = 0
             current = self.head
             while True:
-                if cur_idx == index:
+                if cur_idx == index + 1:
                     return current.value
-                else:
-                    current = current.next
-                    cur_idx += 1
+                current = current.next
+                cur_idx += 1
 
 
 l = LinkedList()
@@ -58,3 +57,5 @@ l.append(2)
 l.append(10)
 l.append(4)
 l.display()
+
+print(l.get(2))
