@@ -16,4 +16,7 @@ class Node:
         self.next = next
 
      
-
+class LinkedList:
+    def __init__(self, head, tail):
+        self.head = head
+        self.tail = tail
