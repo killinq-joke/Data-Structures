@@ -3,59 +3,73 @@ class Node:
         self.value = value
         self.next = None
 
+    def get_value(self):
+        return self.value
+
+    def set_value(self, value):
+        self.value = value
+
+    def get_next(self):
+        return self.next
+
+    def set_next(self, next):
+        self.next = next
+
 
 class LinkedList:
     def __init__(self):
-        self.head = Node()
+        self.head = None
+        self.tail = None
 
-    def append(self, value):
-        new_node = Node(value)
-        cur = self.head
-        while cur.next != None:
-            cur = cur.next
-        cur.next = new_node
+    def add_to_tail(self, value):
 
-    def __len__(self):
+        if not self.tail:
+            self.tail = Node(value)
+        else:
+            self.tail.set_next(Node(value))
+            self.tail = Node(value)
+
+    def remove_head(self):
+        value = self.head.get_value()
+        if not self.head:
+            return None
+        if self.tail is self.head:
+            self.tail = None
+            self.head = None
+            return value
+        self.head = self.head.next
+        return value
+        
+
+    def contains(self, value):
         current = self.head
-        total = 0
         while current.next != None:
-            total += 1
+            if current.value == value:
+                return True
             current = current.next
-        return total
-
-    def add_to_tail(self, tail):
-        self.tail = tail
-
-    def display(self):
-        elems = []
-        cur_node = self.head
-        while cur_node.next != None:
-            cur_node = cur_node.next
-            elems.append(cur_node.value)
-        print(elems)
+        return False
 
     def get_max(self):
-        return "max"
+        current = self.head
+        arr = []
+        while current.value != None:
+            arr.append(current.value)
+        return max(arr)
 
-    def get(self, index):
-        if index >= self.__len__() or index < 0:
-            print("get error")
+    def remove_tail(self):
+        if not self.head:
             return None
-        else:
-            cur_idx = 0
-            current = self.head
-            while True:
-                if cur_idx == index + 1:
-                    return current.value
-                current = current.next
-                cur_idx += 1
 
+        if self.head is self.tail:
+            value = self.head.get_value()
+            self.head = None
+            self.tail = None
+            return value
 
-l = LinkedList()
-l.append(1)
-l.append(2)
-l.append(10)
-l.append(4)
-l.display()
-
-print(l.get(2))
+        current = self.head
+        while current.get_next() is not self.tail:
+            current = current.get_next()
+        value = self.tail.get_value()
+        self.tail = current
+        self.tail.set_next(None)
+        return value
