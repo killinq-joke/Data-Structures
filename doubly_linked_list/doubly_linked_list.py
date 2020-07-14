@@ -21,6 +21,7 @@ class DoublyLinkedList:
     def __len__(self):
         current = self.head
         if current:
+            self.length += 1
             while current.next != None:
                 self.length += 1
                 current.prev = current
@@ -33,9 +34,15 @@ class DoublyLinkedList:
     the old head node's previous pointer accordingly.
     """
     def add_to_head(self, value):
+        new_node = ListNode(value, None, self.head)
         current = self.head
-        current.next = current
-        current = value
+        if not current:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.head = new_node
+            self.prev = new_node
+        
 
         
     """
@@ -111,8 +118,11 @@ class DoublyLinkedList:
         print(arr)    
 
 d = DoublyLinkedList()
-d.add_to_tail(2)
+d.add_to_tail(1)
 d.add_to_tail(20)
 d.add_to_tail(2)
 d.add_to_tail(20)
+
+d.add_to_head(1111)
 d.display()
+print(len(d))
