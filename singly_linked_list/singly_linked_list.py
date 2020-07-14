@@ -118,8 +118,3 @@ class LinkedList:
                 total += 1
                 current = current.get_next()
         return total
-
-
-l = LinkedList()
-
-print(l.len())

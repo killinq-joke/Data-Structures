@@ -19,14 +19,14 @@ class Stack:
         self.storage = LinkedList()
 
     def __len__(self):
-        return len(self.storage)
+        return self.storage.len()
 
     def push(self, value):
         self.storage.add_to_tail(value)
 
     def pop(self):
         # print(self.storage.pop())
-        if len(self.storage) > 0:
+        if self.storage.len() > 0:
             return self.storage.remove_head()
         else:
             return None
