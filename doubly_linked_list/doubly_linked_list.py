@@ -120,7 +120,6 @@ class DoublyLinkedList:
                 current = current.next
         return
 
-
     """
     Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List.
@@ -149,10 +148,21 @@ class DoublyLinkedList:
         current = self.head
         if not current:
             return
-        else:
-            current.next.prev = current.prev
-            current.prev.next = current.next
-            current = None
+        elif node.value == self.head.value:
+            self.head.next.prev = None
+            self.head = self.head.next
+            return
+        elif node.value == self.tail.value:
+            self.tail.prev.next = None
+            return
+        while current != None:
+            if current.value == node.value:
+                current.next.prev = current.prev
+                current.prev.next = current.next
+                current = None
+                self.length -= 1
+                return
+            current = current.next
 
     """
     Finds and returns the maximum value of all the nodes 
@@ -189,7 +199,7 @@ d.add_to_tail(20)
 d.add_to_tail(2)
 d.add_to_tail(55)
 d.add_to_tail(3)
-d.move_to_end(ListNode(55))
+d.delete(ListNode(1))
 d.display()
 print(d.get_max())
 print(len(d))
