@@ -90,9 +90,7 @@ class LinkedList:
             self.tail = None
             return value
 
-        current = self.head
-        while current.get_next() is not self.tail:
-            current = current.get_next()
+        current = self.tail
         value = self.tail.get_value()
         self.tail = current
         self.tail.set_next(None)
