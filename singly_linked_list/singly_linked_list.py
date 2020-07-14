@@ -1,7 +1,7 @@
 class Node:
-    def __init__(self, value=None):
+    def __init__(self, value=None, next=None):
         self.value = value
-        self.next = None
+        self.next = next
 
     def get_value(self):
         return self.value
@@ -18,45 +18,68 @@ class Node:
 
 class LinkedList:
     def __init__(self):
-        self.head = Node()
+        self.head = None
         self.tail = None
 
     def add_to_tail(self, value):
 
         new_node = Node(value)
         cur = self.head
-        while cur.next != None:
-            cur = cur.next
-        cur.next = new_node
-        
+        if not cur:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.set_next(new_node)
+            self.tail = new_node
 
     def remove_head(self):
-        value = self.head.get_value()
+        # return None if there is no head (i.e. the list is empty)
         if not self.head:
             return None
-        if self.tail is self.head:
-            self.tail = None
+        # if head has no next, then we have a single element in our list
+        if not self.head.get_next():
+            # get a reference to the head
+            head = self.head
+            # delete the list's head reference
             self.head = None
-            return value
-        self.head = self.head.next
+            # also make sure the tail reference doesn't refer to anything
+            self.tail = None
+            # return the value
+            return head.get_value()
+        # otherwise we have more than one element in our list
+        value = self.head.get_value()
+        # set the head reference to the current head's next node in the list
+        self.head = self.head.get_next()
         return value
 
     def contains(self, value):
         current = self.head
         if not current:
-            return None
-        while current.next != None:
+            return False
+        while True:
             if current.value == value:
                 return True
             current = current.next
-        return False
+            if current == None:
+                return False
 
     def get_max(self):
-        current = self.head
-        arr = []
-        while current.get_next() != None:
-            arr.append(current.value)
-        return max(arr)
+        if not self.head:
+            return None
+        
+        max_value = self.head.get_value()
+        
+        current = self.head.get_next()
+        
+        while current:
+            
+            if current.get_value() > max_value:
+                
+                max_value = current.get_value()
+            
+            current = current.get_next()
+        return max_value
+        
 
     def remove_tail(self):
         if not self.head:
@@ -83,13 +106,17 @@ class LinkedList:
             while cur_node.next != None:
                 cur_node = cur_node.next
                 arr.append(cur_node.value)
+            arr.append(cur_node.value)
+
         print(arr)
 
 
 l = LinkedList()
 
-l.add_to_tail(20)
-l.add_to_tail(20)
-l.add_to_tail(20)
-
 l.display()
+l.add_to_tail(20)
+l.add_to_tail(100)
+l.add_to_tail(111)
+l.add_to_tail(234)
+l.display()
+print(l.get_max())
