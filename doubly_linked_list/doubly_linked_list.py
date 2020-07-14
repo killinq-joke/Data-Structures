@@ -21,7 +21,7 @@ class DoublyLinkedList:
     def __init__(self, node=None):
         self.head = node
         self.tail = node
-        self.length = 1 if node != None else 0
+        self.length = 0
 
     def __len__(self):
         current = self.head
@@ -88,6 +88,10 @@ class DoublyLinkedList:
         current = self.tail
         if not current:
             return None
+        elif not current.next:
+            result = self.tail
+            self.tail = None
+            return result
         else:
             result = self.tail
             self.tail = self.tail.prev
@@ -147,10 +151,7 @@ class DoublyLinkedList:
 
 
 d = DoublyLinkedList(ListNode(1))
-d.add_to_tail(1)
-d.add_to_tail(9)
-d.add_to_tail(2)
-d.add_to_tail(20)
+
 d.remove_from_tail()
 
 d.display()
