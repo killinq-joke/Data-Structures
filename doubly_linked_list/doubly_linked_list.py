@@ -16,7 +16,7 @@ class DoublyLinkedList:
     def __init__(self, node=None):
         self.head = node
         self.tail = node
-        self.length = 1 if node is not None else 0
+        self.length = 1 if node != None else 0
 
     def __len__(self):
         return self.length
@@ -28,6 +28,7 @@ class DoublyLinkedList:
     """
     def add_to_head(self, value):
         pass
+
         
     """
     Removes the List's current head node, making the
@@ -43,7 +44,16 @@ class DoublyLinkedList:
     the old tail node's next pointer accordingly.
     """
     def add_to_tail(self, value):
-        pass
+        new_node = ListNode(value)
+        cur = self.head
+        if not cur:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.prev = self.tail
+            self.tail.next = new_node
+            self.tail = new_node
+            
             
     """
     Removes the List's current tail node, making the 

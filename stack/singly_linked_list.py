@@ -109,7 +109,7 @@ class LinkedList:
 
         print(arr)
 
-    def len(self):
+    def __len__(self):
         current = self.head
         total = 0
         if current:
