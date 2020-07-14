@@ -101,11 +101,11 @@ class LinkedList:
     def display(self):
         arr = []
         current = self.head
-        arr.append(current.value)
         if current:
             while current.next != None:
                 current = current.next
                 arr.append(current.value)
+            arr.append(current.value)
 
         print(arr)
 
