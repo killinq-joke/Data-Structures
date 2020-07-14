@@ -173,7 +173,7 @@ class DoublyLinkedList:
         current = self.head
         if current:
             max = current.value
-            while current.next != None:
+            while current:
                 if current.value > max:
                     max = current.value
                 current = current.next
@@ -196,10 +196,6 @@ class DoublyLinkedList:
 d = DoublyLinkedList(ListNode(1))
 
 d.add_to_tail(20)
-d.add_to_tail(2)
-d.add_to_tail(55)
-d.add_to_tail(3)
-d.delete(ListNode(1))
 d.display()
 print(d.get_max())
 print(len(d))
