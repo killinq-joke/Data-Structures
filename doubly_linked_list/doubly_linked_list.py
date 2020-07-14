@@ -60,13 +60,12 @@ class DoublyLinkedList:
     the old tail node's next pointer accordingly.
     """
     def add_to_tail(self, value):
-        new_node = ListNode(value)
+        new_node = ListNode(value, self.tail)
         cur = self.head
         if not cur:
             self.head = new_node
             self.tail = new_node
         else:
-            self.tail.prev = self.tail
             self.tail.next = new_node
             self.tail = new_node
             
@@ -77,7 +76,11 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_tail(self):
-        pass
+        current = self.tail
+        if not current:
+            return None
+        else:
+            self.tail = self.tail.prev
             
     """
     Removes the input node from its current spot in the 
@@ -105,7 +108,16 @@ class DoublyLinkedList:
     in the List.
     """
     def get_max(self):
-        pass
+        current = self.head
+        if current:
+            max = current.value
+            while current.next != None:
+                if current.value > max:
+                    max = current.value
+                current = current.next
+            return max
+        else:
+            return None
 
     def display(self):
         arr = []
@@ -127,4 +139,5 @@ d.remove_from_head()
 d.add_to_head(1111)
 
 d.display()
+print(d.get_max())
 print(len(d))
