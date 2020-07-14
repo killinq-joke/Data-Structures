@@ -1,3 +1,9 @@
+from singly_linked_list import LinkedList
+
+l = LinkedList()
+
+l.display()
+
 """
 A queue is a data structure whose primary purpose is to store and
 return elements in First In First Out order. 
