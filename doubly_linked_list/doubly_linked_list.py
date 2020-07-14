@@ -21,17 +21,17 @@ class DoublyLinkedList:
     def __init__(self, node=None):
         self.head = node
         self.tail = node
-        self.length = 0
 
     def __len__(self):
         current = self.head
+        length = 0
         if current:
-            self.length += 1
+            length += 1
             while current.next != None:
-                self.length += 1
+                length += 1
                 current.prev = current
                 current = current.next
-        return self.length
+        return length
 
     """
     Wraps the given value in a ListNode and inserts it 
@@ -57,10 +57,15 @@ class DoublyLinkedList:
         current = self.head
         if not current:
             return None
+        elif not current.prev:
+            result = self.head
+            self.head = self.head.next
+            self.tail = self.tail.prev
+            return result.value
         else:
             result = self.head
             self.head = self.head.next
-            return result
+            return result.value
 
     """
     Wraps the given value in a ListNode and inserts it 
@@ -88,15 +93,16 @@ class DoublyLinkedList:
         current = self.tail
         if not current:
             return None
-        elif not current.next:
-            result = self.tail
-            self.tail = None
-            return result
+        elif not current.prev:
+            result = self.head
+            self.head = self.head.next
+            self.tail = self.tail.prev
+            return result.value
         else:
             result = self.tail
             self.tail = self.tail.prev
             self.tail.next = None
-            return result
+            return result.value
     """
     Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List.
@@ -153,7 +159,7 @@ class DoublyLinkedList:
 d = DoublyLinkedList(ListNode(1))
 
 d.remove_from_tail()
-
+print(d.tail)
 d.display()
 print(d.get_max())
 print(len(d))
