@@ -66,20 +66,19 @@ class LinkedList:
     def get_max(self):
         if not self.head:
             return None
-        
+
         max_value = self.head.get_value()
-        
+
         current = self.head.get_next()
-        
+
         while current:
-            
+
             if current.get_value() > max_value:
-                
+
                 max_value = current.get_value()
-            
+
             current = current.get_next()
         return max_value
-        
 
     def remove_tail(self):
         if not self.head:
@@ -101,11 +100,21 @@ class LinkedList:
 
     def display(self):
         arr = []
-        cur_node = self.head
-        if cur_node:
-            while cur_node.next != None:
-                cur_node = cur_node.next
-                arr.append(cur_node.value)
-            arr.append(cur_node.value)
+        current = self.head
+        if current:
+            while current.next != None:
+                current = current.next
+                arr.append(current.value)
+            arr.append(current.value)
 
         print(arr)
+
+    def len(self):
+        current = self.head
+        total = 0
+        if current:
+            total += 1
+            while current.next != None:
+                total += 1
+                current = current.get_next()
+        return total
