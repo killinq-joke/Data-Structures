@@ -31,3 +31,20 @@ class Queue:
             return self.storage.remove_head()
         else:
             return None
+
+class Queue:
+    def __init__(self):
+        self.size = 0
+        self.storage = []
+    
+    def __len__(self):
+        return len(self.storage)
+
+    def enqueue(self, value):
+        self.storage.append(value)
+
+    def dequeue(self):
+        if len(self.storage) > 0:
+            return self.storage.pop(0)
+        else:
+            return None
