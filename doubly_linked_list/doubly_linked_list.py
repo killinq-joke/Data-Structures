@@ -112,7 +112,7 @@ class DoublyLinkedList:
         if current:
             while current.next != None:
                 if current.value == node.value:
-                    self.add_to_tail(current.value)
+                    self.add_to_head(current.value)
                     current.next.prev = current.prev
                     current.prev.next = current.next
                     current = None
@@ -148,12 +148,19 @@ class DoublyLinkedList:
         current = self.head
         if not current:
             return
+        elif node.value == self.head.value and self.head == self.tail:
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return
         elif node.value == self.head.value:
             self.head.next.prev = None
             self.head = self.head.next
+            self.length -= 1
             return
         elif node.value == self.tail.value:
             self.tail.prev.next = None
+            self.length -= 1
             return
         while current != None:
             if current.value == node.value:
@@ -194,8 +201,9 @@ class DoublyLinkedList:
 
 
 d = DoublyLinkedList(ListNode(1))
+d.delete(ListNode(1))
 
-d.add_to_tail(20)
+
 d.display()
 print(d.get_max())
 print(len(d))
