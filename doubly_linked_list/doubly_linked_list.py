@@ -110,12 +110,10 @@ class DoublyLinkedList:
     def move_to_front(self, node):
         current = self.head
         if current:
-            while current.next != None:
+            while current != None:
                 if current.value == node.value:
+                    self.delete(node)
                     self.add_to_head(current.value)
-                    current.next.prev = current.prev
-                    current.prev.next = current.next
-                    current = None
                     return
                 current = current.next
         return
@@ -131,10 +129,7 @@ class DoublyLinkedList:
             while current.next != None:
                 if current.value == node.value:
                     self.add_to_tail(current.value)
-                    current.next.prev = current.prev
-                    current.prev.next = current.next
-                    self.length -= 1
-                    current = None
+                    self.delete(node)
                     return
                 current = current.next
         return
@@ -201,9 +196,8 @@ class DoublyLinkedList:
 
 
 d = DoublyLinkedList(ListNode(1))
-d.delete(ListNode(1))
+d.add_to_tail(3)
+d.move_to_front(ListNode(3))
 
 
 d.display()
-print(d.get_max())
-print(len(d))
