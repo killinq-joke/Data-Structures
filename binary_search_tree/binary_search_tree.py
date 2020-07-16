@@ -9,7 +9,9 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
-
+import sys
+sys.path.append("../queue")
+from queue import Queue
 
 class BSTNode:
     def __init__(self, value):
@@ -71,38 +73,54 @@ class BSTNode:
     # Hint:  Use a recursive, depth first traversal
 
     def in_order_print(self, node):
-        current = node or self
-        while current.left != None:
-            current = current.left
-
+        print(self.value)
+        if self.left:
+            self.left.in_order_print(self.left)
+        if self.right:
+            self.right.in_order_print(self.right)
+        
 
     # Print the value of every node, starting with the given node,
-    # in an iterative breadth first traversal 
+    # in an iterative breadth first traversal
+
     def bft_print(self, node):
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        print(self.value)
+        if self.left:
+            self.left.in_order_print(self.left)
+        if self.right:
+            self.right.in_order_print(self.right)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        print(self.value)
+        if not self.right and self.left == None:
+            return
+        if self.left:
+            self.left.in_order_print(node)
+        if self.right:
+            self.right.in_order_print(node)
+        return False
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
 
 
-bst = BSTNode(5)
+bst = BSTNode(1)
+bst.insert(8)
+bst.insert(5)
 bst.insert(7)
 bst.insert(6)
-bst.insert(2)
 bst.insert(3)
-print(bst.get_max())
+bst.insert(4)
+bst.insert(2)
 
-print("fin")
+bst.in_order_print(bst)

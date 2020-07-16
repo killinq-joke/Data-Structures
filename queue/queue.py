@@ -1,5 +1,4 @@
 from singly_linked_list import LinkedList
-
 """
 A queue is a data structure whose primary purpose is to store and
 return elements in First In First Out order. 
@@ -32,19 +31,19 @@ class Queue:
         else:
             return None
 
-class Queue:
-    def __init__(self):
-        self.size = 0
-        self.storage = []
+# class Queue:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = []
     
-    def __len__(self):
-        return len(self.storage)
+#     def __len__(self):
+#         return len(self.storage)
 
-    def enqueue(self, value):
-        self.storage.append(value)
+#     def enqueue(self, value):
+#         self.storage.append(value)
 
-    def dequeue(self):
-        if len(self.storage) > 0:
-            return self.storage.pop(0)
-        else:
-            return None
+#     def dequeue(self):
+#         if len(self.storage) > 0:
+#             return self.storage.pop(0)
+#         else:
+#             return None

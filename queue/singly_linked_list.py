@@ -90,7 +90,9 @@ class LinkedList:
             self.tail = None
             return value
 
-        current = self.tail
+        current = self.head
+        while current.get_next() is not self.tail:
+            current = current.get_next()
         value = self.tail.get_value()
         self.tail = current
         self.tail.set_next(None)
@@ -99,11 +101,11 @@ class LinkedList:
     def display(self):
         arr = []
         current = self.head
+        arr.append(current.value)
         if current:
             while current.next != None:
                 current = current.next
                 arr.append(current.value)
-            arr.append(current.value)
 
         print(arr)
 
