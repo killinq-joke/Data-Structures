@@ -9,9 +9,9 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
-from queue import Queue
-import sys
-sys.path.append("../queue")
+
+from Queue import Queue
+queue = Queue()
 
 class BSTNode:
     def __init__(self, value):
@@ -83,12 +83,20 @@ class BSTNode:
     # in an iterative breadth first traversal
 
     def bft_print(self, node):
+        queue.enqueue(self)
+        if self.left and self.right:
+            
+            self.left.bft_print(self.left)
+            self.right.bft_print(self.right)
+        elif self.left:
+            self.left.bft_print(self.left)
+        elif self.right:
+            self.right.bft_print(self.right)
         
-        if self.left:
-            self.left.in_order_print(self.left)
-        if self.right:
-            self.right.in_order_print(self.right)
-        print(self.value)
+        while len(queue) != 0:
+            print(queue.storage[0].value)
+            queue.dequeue()
+        
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
