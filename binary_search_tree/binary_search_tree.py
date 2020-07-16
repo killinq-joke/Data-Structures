@@ -107,7 +107,6 @@ class BSTNode:
             self.left.in_order_print(node)
         if self.right:
             self.right.in_order_print(node)
-        return False
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
