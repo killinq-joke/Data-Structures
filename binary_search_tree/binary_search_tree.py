@@ -149,4 +149,4 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-bst.post_order_dft(bst)
+bst.pre_order_dft(bst)
