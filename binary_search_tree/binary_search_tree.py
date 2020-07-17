@@ -105,11 +105,20 @@ class BSTNode:
     # in an iterative depth first traversal
 
     def dft_print(self, node):
-        print(self.value)
-        if self.left:
-            self.left.in_order_print(self.left)
-        if self.right:
-            self.right.in_order_print(self.right)
+        queue.enqueue(node)
+        if self.left and self.right:
+            self.left.dft_print(self.left)
+            self.right.dft_print(self.right)
+
+        elif self.left:
+            self.left.dft_print(self.left)
+
+        elif self.right:
+            self.right.dft_print(self.right)
+
+        while len(queue) != 0:
+            print(queue.storage[0].value)
+            queue.dequeue()
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -142,4 +151,4 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-bst.post_order_dft(bst)
+bst.dft_print(bst)
