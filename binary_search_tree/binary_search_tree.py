@@ -10,6 +10,9 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 
+from Queue import Queue
+queue = Queue()
+
 
 class BSTNode:
     def __init__(self, value):
@@ -20,12 +23,12 @@ class BSTNode:
     # Insert the given value into the tree
     def insert(self, value):
         if value >= self.value:
-            if self.right != None:
+            if self.right:
                 self.right.insert(value)
                 return
             self.right = BSTNode(value)
         else:
-            if self.left != None:
+            if self.left:
                 self.left.insert(value)
                 return
             self.left = BSTNode(value)
@@ -50,10 +53,9 @@ class BSTNode:
     def get_max(self):
         max = self.value
         right = self.right
-        while right != None:
+        while right:
             max = right.value
             right = right.right
-
         return max
 
     # Call the function `fn` on the value of each node
@@ -62,10 +64,8 @@ class BSTNode:
         if not self.right and self.left == None:
             return
         if self.right:
-            fn(self.right.value)
             self.right.for_each(fn)
         if self.left:
-            fn(self.left.value)
             self.left.for_each(fn)
 
     # Part 2 -----------------------
@@ -74,35 +74,79 @@ class BSTNode:
     # Hint:  Use a recursive, depth first traversal
 
     def in_order_print(self, node):
-        pass
+        if self.left:
+            self.left.in_order_print(self.left)
+        print(self.value)
+        if self.right:
+            self.right.in_order_print(self.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
-        pass
+        if node:
+            print(self.value)
+        if self.left and self.right:
+            queue.enqueue(self.left)
+            queue.enqueue(self.right)
+            self.left.bft_print(False)
+            self.right.bft_print(False)
+        elif self.left:
+            queue.enqueue(self.left)
+            self.left.bft_print(False)
+        elif self.right:
+            queue.enqueue(self.right)
+            self.right.bft_print(False)
+        while len(queue) != 0:
+            print(queue.storage[0].value)
+            queue.dequeue()
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self, node):
-        pass
+        queue.enqueue(node)
+        if self.left and self.right:
+            self.left.dft_print(self.left)
+            self.right.dft_print(self.right)
+
+        elif self.left:
+            self.left.dft_print(self.left)
+
+        elif self.right:
+            self.right.dft_print(self.right)
+
+        while len(queue) != 0:
+            print(queue.storage[0].value)
+            queue.dequeue()
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        print(self.value)
+        if self.left:
+            self.left.pre_order_dft(node)
+        if self.right:
+            self.right.pre_order_dft(node)
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if self.left:
+            self.left.post_order_dft(self.left)
+        if self.right:
+            self.right.post_order_dft(self.right)
+        print(self.value)
 
 
-bst = BSTNode(5)
+bst = BSTNode(1)
+bst.insert(8)
+bst.insert(5)
 bst.insert(7)
 bst.insert(6)
-bst.insert(2)
 bst.insert(3)
-print(bst.get_max())
+bst.insert(4)
+bst.insert(2)
 
-print("fin")
+bst.pre_order_dft(bst)
