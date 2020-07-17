@@ -13,6 +13,7 @@ This part of the project comprises two days:
 from Queue import Queue
 queue = Queue()
 
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -83,23 +84,26 @@ class BSTNode:
     # in an iterative breadth first traversal
 
     def bft_print(self, node):
-        queue.enqueue(self)
+        if node:
+            print(self.value)
         if self.left and self.right:
-            
-            self.left.bft_print(self.left)
-            self.right.bft_print(self.right)
+            queue.enqueue(self.left)
+            queue.enqueue(self.right)
+            self.left.bft_print(False)
+            self.right.bft_print(False)
         elif self.left:
-            self.left.bft_print(self.left)
+            queue.enqueue(self.left)
+            self.left.bft_print(False)
         elif self.right:
-            self.right.bft_print(self.right)
-        
+            queue.enqueue(self.right)
+            self.right.bft_print(False)
         while len(queue) != 0:
             print(queue.storage[0].value)
             queue.dequeue()
-        
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self, node):
         print(self.value)
         if self.left:
@@ -138,4 +142,4 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-bst.bft_print(bst)
+bst.post_order_dft(bst)
